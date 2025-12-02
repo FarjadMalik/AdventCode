@@ -17,9 +17,9 @@ def part_1(rotations: list[int], position: int=50, dial_max: int=100) -> int:
 
     # Go over the list and apply rotations sequantially and count if the zero marker is hit
     for rot in rotations:
-        position += rot
+        position = (position + rot) % dial_max
         # if a 0 is hit then add
-        zeros += position % 100 == 0
+        zeros += position == 0
 
     return zeros
 
@@ -37,7 +37,7 @@ def part_2(rotations: list[int], position: int=50, dial_max: int=100) -> int:
     # Go over the list and apply rotations sequantially and count if the zero marker is hit + also add crossings
     for rot in rotations:
         at_zero = position == 0
-        crossings, position = divmod(position + rot, 100)
+        crossings, position = divmod(position + rot, dial_max)
         zeros += abs(crossings)
         if rot < 0:
             zeros += (position == 0) - at_zero
