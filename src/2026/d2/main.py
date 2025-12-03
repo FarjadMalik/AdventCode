@@ -91,7 +91,7 @@ def main(fp_input: str) -> None:
     result = part_2(ranges)
     logger.info(f"Solved for {fp_input}, use (part 2): {result}")
 
-
+ 
 if __name__ == "__main__":
     # main(fp_input="src/2026/d2/test.txt")
     main(fp_input="src/2026/d2/input.txt")
