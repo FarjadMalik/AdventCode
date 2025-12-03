@@ -35,16 +35,17 @@ def max_subseq_k(bank: str, d: int) -> int:
     joltage = []
     to_remove = len(bank) - d
     for ch in bank:
-        # logger.debug(f"ch - {ch}, to_remove - {to_remove} - joltage {joltage}")
+
         # While we can still remove digits, and stack top is less than current digit,
         # pop it to make number larger
         while to_remove > 0 and joltage and joltage[-1] < ch:
             joltage.pop()
             to_remove -= 1
+        # Otherwise just append to our list
         joltage.append(ch)
+
     # If we've not removed enough (e.g. digits were non-increasing),
     # truncate from the end
-    # logger.debug(f"Bank - {bank}, joltage - {joltage} - {joltage[:d]}")
     return int(''.join(joltage[:d]))
 
 def part_2(banks: list[str], nob: int=12) -> int:
@@ -86,6 +87,9 @@ def main(fp_input: str, position: int = 50, dial_max: int=100) -> None:
 
     result = part_1(banks)
     logger.info(f"Solved for {fp_input}, use (part 1): {result}")
+
+    result = part_2(banks, nob=2)
+    logger.info(f"Solved for {fp_input}, use (part 2 for p1): {result}")
 
     result = part_2(banks)
     logger.info(f"Solved for {fp_input}, use (part 2): {result}")
