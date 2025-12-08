@@ -36,7 +36,7 @@ def part_1(data: list[str], nconnection: int=1000, ncircuits: int=3) -> int:
     # logger.debug(f"connections - {len(connections)}")
 
     # We can reuse our UnionFind class here as well but lets leave it as is for now
-    
+
     # Build represents connecting n boxes
     connecting_dict = {box: [] for box in boxes}
     for box1, box2 in connections[:nconnection]:
@@ -112,7 +112,7 @@ def main(fp_input: str) -> None:
     # logger.debug(f"File content - \n{content}")
     data = [row for row in content.splitlines()]    
 
-    result = part_1(data, nconnection=10)
+    result = part_1(data, nconnection=1000)
     logger.debug(f"File result part 1 - {result}")
 
     result = part_2(data)
