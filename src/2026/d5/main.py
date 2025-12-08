@@ -92,13 +92,11 @@ def parse_food_db(food_db: str) -> tuple[list[tuple[int, ...]], list[int]]:
 
     return valid_ranges, ingredients
 
-def main(fp_input: str, position: int = 50, dial_max: int=100) -> None:
+def main(fp_input: str) -> None:
     """
     
     Args:
         fp_input: input file path containing the dials (line by line)
-        position: initial position of the dial when we start, by default 50
-        dial_max: max clicks on the dial, by default 100 (0-99)
     """
     logger.info(f"Your password is encrypted in: {fp_input}")
 
