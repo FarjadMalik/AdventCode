@@ -1,18 +1,18 @@
+import numpy as np
+
 # Internal imports
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
 
-def part_1() -> int:
+def part_1(areas: np.ndarray, tree_fits: list) -> int:
     """
     """
-    ...
-
-def part_2() -> int:
-    """
-    """
-    ...
+    # for region_area, fit in tree_fits:
+    #     logger.debug(f"region_area, fit - {region_area, fit}")
+    #     logger.debug(f"areas @ fit - {areas @ fit}")
+    return sum(region_area >= areas @ fit for region_area, fit in tree_fits)
 
 def main(fp_input: str) -> None:
     """
@@ -24,16 +24,24 @@ def main(fp_input: str) -> None:
     # Read input file content 
     with open(fp_input, "r", encoding="utf-8") as f:
         content = f.read()
-    logger.debug(f"File content - \n{content}")
-    # data = [row for row in content.splitlines()]  
 
-    result = part_1()
+    *packages, trees = content.split("\n\n")
+    areas = np.array([package.count("#") for package in packages])
+
+    tree_regionfits = []
+    for tree in trees.splitlines():
+        region, fits = tree.split(": ")
+        h, w = region.split('x')
+        region_area = int(h)*int(w)
+        fits = np.array(fits.split(), dtype=int)
+        tree_regionfits.append((region_area, fits))
+
+    # logger.debug(f"tree_regionfits - {tree_regionfits}")
+
+    result = part_1(areas, tree_regionfits)
     logger.info(f"Solved for {fp_input}, use (part 1): {result}")
-
-    result = part_2()
-    logger.info(f"Solved for {fp_input}, use (part 2): {result}")
 
 
 if __name__ == "__main__":
-    main(fp_input="src/2026/d12/test.txt")
-    # main(fp_input="src/2026/d12/input.txt")
+    # main(fp_input="src/2026/d12/test.txt")
+    main(fp_input="src/2026/d12/input.txt")
